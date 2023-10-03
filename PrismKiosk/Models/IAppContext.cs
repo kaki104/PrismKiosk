@@ -27,5 +27,9 @@ namespace PrismKiosk.Models
         /// 매장 이용 여부 false이면 포장
         /// </summary>
         bool IsEatIn { get; set; }
+        /// <summary>
+        /// 현재 진행 중인 주문
+        /// </summary>
+        Order CurrentOrder { get; set; }
     }
 }

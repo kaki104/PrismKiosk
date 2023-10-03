@@ -39,5 +39,13 @@ namespace PrismKiosk.Models
         /// 아이템들
         /// </summary>
         public IList<OrderDetail> Items { get; set; } = new ObservableCollection<OrderDetail>();
+        /// <summary>
+        /// 프로퍼티 업데이트
+        /// </summary>
+        public void UpdateProperties()
+        {
+            TotalQuantity = Items.Sum(x => x.Quantity);
+            TotalAmount = Items.Sum(x => x.Amount);
+        }
     }
 }

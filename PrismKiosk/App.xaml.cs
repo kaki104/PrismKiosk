@@ -28,6 +28,8 @@ namespace PrismKiosk
             containerRegistry.RegisterForNavigation<OrderStart>();
             //메뉴 선택 화면
             containerRegistry.RegisterForNavigation<SelectMenu>();
+            //결제 화면
+            containerRegistry.RegisterForNavigation<Payment>();
 
             containerRegistry.RegisterForNavigation<ManagerLogin>();
         }

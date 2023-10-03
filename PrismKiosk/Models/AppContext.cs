@@ -49,6 +49,14 @@ namespace PrismKiosk.Models
             get { return _isEatIn; }
             set { SetProperty(ref _isEatIn, value); }
         }
-
+        private Order _currentOrder;
+        /// <summary>
+        /// 현재 주문
+        /// </summary>
+        public Order CurrentOrder
+        {
+            get { return _currentOrder; }
+            set { SetProperty(ref _currentOrder, value); }
+        }
     }
 }
