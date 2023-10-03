@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Threading;
 
 namespace PrismKiosk.ViewModels
 {
@@ -36,9 +37,18 @@ namespace PrismKiosk.ViewModels
             set { SetProperty(ref _appContext, value); }
         }
         /// <summary>
+        /// 타이머
+        /// </summary>
+        protected DispatcherTimer Timer;
+
+        /// <summary>
         /// 처음으로 커맨드
         /// </summary>
         public ICommand HomeCommand { get; set; }
+        /// <summary>
+        /// 뒤로가기 커맨드
+        /// </summary>
+        public ICommand GoBackCommand { get; set; }
 
         private bool _isBusy;
         /// <summary>
@@ -70,7 +80,24 @@ namespace PrismKiosk.ViewModels
         private void Init()
         {
             HomeCommand = new DelegateCommand<string>(OnHome);
+            GoBackCommand = new DelegateCommand<string>(OnGoBack);
         }
+        /// <summary>
+        /// 뒤로 돌아가기
+        /// </summary>
+        private void OnGoBack(string viewType)
+        {
+            if (viewType != "kiosk")
+            {
+                return;
+            }
+            var regionJournal = RegionManager.Regions["KioskContentRegion"].NavigationService.Journal;
+            if(regionJournal != null && regionJournal.CanGoBack)
+            {
+                regionJournal.GoBack();
+            }
+        }
+
         /// <summary>
         /// 홈 화면으로 이동 - kiosk이면 동작
         /// </summary>

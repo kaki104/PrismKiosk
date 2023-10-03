@@ -49,5 +49,6 @@ namespace PrismKiosk.Models
             get { return _isEatIn; }
             set { SetProperty(ref _isEatIn, value); }
         }
+
     }
 }

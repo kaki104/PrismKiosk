@@ -6,15 +6,121 @@
     xmlns:local="clr-namespace:PrismKiosk.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:prism="http://prismlibrary.com/"
-    d:DesignHeight="450"
-    d:DesignWidth="800"
+    xmlns:vm="clr-namespace:PrismKiosk.ViewModels"
+    d:DataContext="{d:DesignInstance vm:SelectMenuViewModel,
+                                     IsDesignTimeCreatable=True}"
+    d:DesignHeight="1080"
+    d:DesignWidth="640"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="TabItem">
+            <Setter Property="HeaderTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border>
+                            <TextBlock Padding="20" Text="{Binding}" />
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid>
-        <TextBlock
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="30"
-            Text="Select Menu" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="0.6*" />
+            <RowDefinition Height="0.4*" />
+        </Grid.RowDefinitions>
+        <Button
+            Grid.Column="0"
+            Margin="10"
+            Padding="10"
+            HorizontalAlignment="Left"
+            Command="{Binding GoBackCommand}"
+            CommandParameter="kiosk"
+            Content="이전으로" />
+        <Button
+            Grid.Column="0"
+            Margin="10"
+            Padding="10"
+            HorizontalAlignment="Right"
+            Command="{Binding HomeCommand}"
+            CommandParameter="kiosk"
+            Content="처음으로" />
+        <TabControl Grid.Row="1">
+            <TabItem Header="커피">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <ItemsControl ItemsSource="{Binding Coffees}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel
+                                    IsItemsHost="True"
+                                    ItemHeight="230"
+                                    ItemWidth="310" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Image Source="{Binding ImageUri}" Stretch="UniformToFill" />
+                                    <StackPanel Grid.Row="1">
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Name}" />
+                                        <TextBlock HorizontalAlignment="Center" Text="{Binding Price, StringFormat={}{0:N0}}" />
+                                    </StackPanel>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="10"
+                        Padding="10"
+                        HorizontalAlignment="Left"
+                        Command="{Binding GoBackCommand}"
+                        CommandParameter="kiosk"
+                        Content="이전" />
+                    <Button
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Margin="10"
+                        Padding="10"
+                        HorizontalAlignment="Right"
+                        Command="{Binding HomeCommand}"
+                        CommandParameter="kiosk"
+                        Content="다음" />
+                </Grid>
+            </TabItem>
+            <TabItem Header="프라프치노" />
+            <TabItem Header="논커피" />
+            <TabItem Header="에이드" />
+        </TabControl>
+        <Grid Grid.Row="2" Margin="0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.8*" />
+                <ColumnDefinition Width="0.2*" />
+            </Grid.ColumnDefinitions>
+            <DataGrid>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="메뉴명" />
+                    <DataGridTextColumn Header="단가" />
+                    <DataGridTextColumn Header="수량" />
+                    <DataGridTextColumn Header="금액" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button
+                Grid.Column="1"
+                Margin="10,0,0,0"
+                Content="결제" />
+        </Grid>
     </Grid>
 </UserControl>

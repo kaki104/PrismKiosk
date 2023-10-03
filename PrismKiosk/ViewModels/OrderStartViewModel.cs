@@ -13,11 +13,6 @@ namespace PrismKiosk.ViewModels
     public class OrderStartViewModel : ViewModelBase
     {
         /// <summary>
-        /// 타이머
-        /// </summary>
-        private DispatcherTimer _timer;
-
-        /// <summary>
         /// 주문 구분 선택 커맨드
         /// </summary>
         public ICommand OrderTypeCommand { get; set; }
@@ -45,9 +40,6 @@ namespace PrismKiosk.ViewModels
         {
             OrderTypeCommand = new DelegateCommand<string>(OnOrderType);
             DisabledCommand = new DelegateCommand<string>(OnDisabled);
-
-            _timer = new DispatcherTimer(TimeSpan.FromSeconds(30),
-                        DispatcherPriority.Normal, TimerTick, App.Current.Dispatcher);
         }
         private void TimerTick(object sender, EventArgs e)
         {
@@ -80,8 +72,10 @@ namespace PrismKiosk.ViewModels
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
             AppContext.KioskStatus = Commons.StatusEnum.OrderStart;
-            _timer.Stop();
-            _timer.Start();
+
+            Timer = new DispatcherTimer(TimeSpan.FromSeconds(30),
+                        DispatcherPriority.Normal, TimerTick, App.Current.Dispatcher);
+            Timer.Start();
         }
         /// <summary>
         /// 나갈때
@@ -100,8 +94,12 @@ namespace PrismKiosk.ViewModels
         }
         private void DestroyTimer()
         {
-            _timer.Stop();
-            _timer = null;
+            if(Timer == null)
+            {
+                return;
+            }
+            Timer.Stop();
+            Timer = null;
         }
     }
 }
