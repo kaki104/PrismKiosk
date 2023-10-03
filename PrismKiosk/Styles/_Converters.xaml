@@ -1,0 +1,13 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="clr-namespace:PrismKiosk.Converters">
+    <!--  정방향 BoolToVisibilityConverter  -->
+    <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+    <!--  역방향 BoolToVisibilityConverter  -->
+    <converters:BoolToVisibilityConverter
+        x:Key="InverterBoolToVisibilityConverter"
+        FalseVisibility="Visible"
+        TrueVisibility="Collapsed" />
+
+</ResourceDictionary>

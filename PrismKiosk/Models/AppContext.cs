@@ -1,17 +1,12 @@
 ﻿using Prism.Mvvm;
 using PrismKiosk.Commons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PrismKiosk.Models
 {
     /// <summary>
     /// AppContext - 애플리케이션에서 전체적으로 유지하는 데이터 보관
     /// </summary>
-    public class AppContext : BindableBase
+    public class AppContext : BindableBase, IAppContext
     {
         /// <summary>
         /// 관리자 로그인 여부
@@ -44,6 +39,15 @@ namespace PrismKiosk.Models
         {
             get { return _kioskStatus; }
             set { SetProperty(ref _kioskStatus, value); }
+        }
+        private bool _isEatIn;
+        /// <summary>
+        /// 매장 이용 여부 false이면 포장
+        /// </summary>
+        public bool IsEatIn
+        {
+            get { return _isEatIn; }
+            set { SetProperty(ref _isEatIn, value); }
         }
     }
 }

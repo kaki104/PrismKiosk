@@ -5,6 +5,12 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
   <ItemGroup>
+    <None Remove="Assets\Images\delicious-ice-cream-in-studio.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Assets\Images\delicious-ice-cream-in-studio.jpg" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.31" />
     <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
   </ItemGroup>

@@ -1,9 +1,15 @@
-﻿<prism:PrismApplication x:Class="PrismKiosk.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PrismKiosk"
-             xmlns:prism="http://prismlibrary.com/" >
+﻿<prism:PrismApplication
+    x:Class="PrismKiosk.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:PrismKiosk"
+    xmlns:prism="http://prismlibrary.com/">
     <Application.Resources>
-         
+        <!--  https://learn.microsoft.com/ko-kr/dotnet/desktop/wpf/systems/xaml-resources-merged-dictionaries?view=netdesktop-7.0&wt.mc_id=WDIT-MVP-5000651  -->
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/_Converters.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

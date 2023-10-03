@@ -1,18 +1,22 @@
-﻿using Prism.Ioc;
+﻿using Prism.Commands;
+using Prism.Ioc;
 using Prism.Mvvm;
+using Prism.Navigation;
 using Prism.Regions;
+using PrismKiosk.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace PrismKiosk.ViewModels
 {
     /// <summary>
     /// 뷰모델 베이스, 바인드어블베이스, 네이게이션어웨어
     /// </summary>
-    public abstract class ViewModelBase : BindableBase, INavigationAware
+    public abstract class ViewModelBase : BindableBase, INavigationAware, IDestructible
     {
         /// <summary>
         /// 컨테이터 프로바이더
@@ -22,6 +26,19 @@ namespace PrismKiosk.ViewModels
         /// 리즌 메니저
         /// </summary>
         protected IRegionManager RegionManager;
+        private IAppContext _appContext;
+        /// <summary>
+        /// 앱 컨텍스트
+        /// </summary>
+        public IAppContext AppContext
+        {
+            get { return _appContext; }
+            set { SetProperty(ref _appContext, value); }
+        }
+        /// <summary>
+        /// 처음으로 커맨드
+        /// </summary>
+        public ICommand HomeCommand { get; set; }
 
         private bool _isBusy;
         /// <summary>
@@ -46,7 +63,44 @@ namespace PrismKiosk.ViewModels
         {
             ContainerProvider = containerProvider;
             RegionManager = ContainerProvider.Resolve<IRegionManager>();
+            AppContext = ContainerProvider.Resolve<IAppContext>();
+            Init();
         }
+
+        private void Init()
+        {
+            HomeCommand = new DelegateCommand<string>(OnHome);
+        }
+        /// <summary>
+        /// 홈 화면으로 이동 - kiosk이면 동작
+        /// </summary>
+        /// <param name="viewType"></param>
+        private void OnHome(string viewType)
+        {
+            if (viewType != "kiosk")
+            {
+                return;
+            }
+            ClearAppContextAndGoHome();
+        }
+        /// <summary>
+        /// AppContext 내용 클리어
+        /// </summary>
+        protected void ClearAppContextAndGoHome()
+        {
+            //지금까지 주문 내역 클리어
+            AppContext.IsEatIn = false;
+
+            //처음 화면으로 이동
+            var region = RegionManager.Regions["KioskContentRegion"];
+            if (region == null)
+            {
+                return;
+            }
+            region.RemoveAll();
+            region.RequestNavigate("KioskIntro");
+        }
+
         /// <summary>
         /// 네비게이션 되었을 때
         /// </summary>
@@ -71,5 +125,8 @@ namespace PrismKiosk.ViewModels
         {
         }
 
+        public virtual void Destroy()
+        {
+        }
     }
 }

@@ -41,10 +41,21 @@ namespace PrismKiosk.ViewModels
             //OrderStart 화면으로 네비게이션
             RegionManager.RequestNavigate("KioskContentRegion", "OrderStart");
         }
-
+        /// <summary>
+        /// 나갈때
+        /// </summary>
+        /// <param name="navigationContext"></param>
         public override void OnNavigatedFrom(NavigationContext navigationContext)
         {
             //동영상 플레이 중지 혹은 작업 중지
+        }
+        /// <summary>
+        /// 들어올때
+        /// </summary>
+        /// <param name="navigationContext"></param>
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            AppContext.KioskStatus = Commons.StatusEnum.KioskIntro;
         }
     }
 }
