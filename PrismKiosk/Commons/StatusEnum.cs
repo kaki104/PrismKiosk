@@ -14,7 +14,7 @@ namespace PrismKiosk.Commons
         /// <summary>
         /// 인트로
         /// </summary>
-        Intro,
+        KioskIntro,
         /// <summary>
         /// 주문 구분(시작)
         /// </summary>
