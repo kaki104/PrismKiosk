@@ -41,7 +41,7 @@ namespace PrismKiosk.Models
         public int UnitPrice
         {
             get { return _unitPrice; }
-            set { SetProperty(ref _unitPrice, value); }
+            set { SetProperty(ref _unitPrice, value, () => RaisePropertyChanged(nameof(Amount))); }
         }
         private int _quantity;
         /// <summary>
@@ -50,16 +50,14 @@ namespace PrismKiosk.Models
         public int Quantity
         {
             get { return _quantity; }
-            set { SetProperty(ref _quantity, value); }
+            set { SetProperty(ref _quantity, value, () => RaisePropertyChanged(nameof(Amount))); }
         }
-        private int _amount;
         /// <summary>
         /// 금액
         /// </summary>
         public int Amount
         {
-            get { return _amount; }
-            set { SetProperty(ref _amount, value); }
+            get { return Quantity * UnitPrice; }
         }
 
     }

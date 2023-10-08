@@ -26,6 +26,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style x:Key="DataGridTextColumnRight" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style x:Key="HeaderTextCenter" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -98,7 +104,7 @@
                         Margin="10"
                         Padding="10"
                         HorizontalAlignment="Left"
-                        Command="{Binding GoBackCommand}"
+                        Command="{Binding PreviousCommand}"
                         CommandParameter="kiosk"
                         Content="이전" />
                     <Button
@@ -107,7 +113,7 @@
                         Margin="10"
                         Padding="10"
                         HorizontalAlignment="Right"
-                        Command="{Binding HomeCommand}"
+                        Command="{Binding NextCommand}"
                         CommandParameter="kiosk"
                         Content="다음" />
                 </Grid>
@@ -129,20 +135,44 @@
                     <DataGridTextColumn
                         Width="200"
                         Binding="{Binding ProductName}"
-                        Header="메뉴명" />
+                        Header="메뉴명"
+                        HeaderStyle="{StaticResource HeaderTextCenter}" />
                     <DataGridTextColumn
                         Width="100"
                         Binding="{Binding UnitPrice, StringFormat={}{0:N0}}"
+                        ElementStyle="{StaticResource DataGridTextColumnRight}"
                         Header="단가"
-                        TextBlock.TextAlignment="Right" />
+                        HeaderStyle="{StaticResource HeaderTextCenter}" />
                     <DataGridTextColumn
                         Width="60"
                         Binding="{Binding Quantity, StringFormat={}{0:N0}}"
-                        Header="수량" />
+                        ElementStyle="{StaticResource DataGridTextColumnRight}"
+                        Header="수량"
+                        HeaderStyle="{StaticResource HeaderTextCenter}" />
                     <DataGridTextColumn
                         Width="100"
                         Binding="{Binding Amount, StringFormat={}{0:N0}}"
-                        Header="금액" />
+                        ElementStyle="{StaticResource DataGridTextColumnRight}"
+                        Header="금액"
+                        HeaderStyle="{StaticResource HeaderTextCenter}" />
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button
+                                        Width="20"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.AddCommand}"
+                                        CommandParameter="{Binding}"
+                                        Content="+" />
+                                    <Button
+                                        Width="20"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.RemoveCommand}"
+                                        CommandParameter="{Binding}"
+                                        Content="-" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Grid Grid.Column="1" Margin="10,0,0,0">
@@ -150,11 +180,10 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <TextBlock>
-                    <Run Text="총금액" />
-                    <LineBreak />
-                    <Run Text="{Binding AppContext.CurrentOrder.TotalAmount, StringFormat={}{0:N0}}" />
-                </TextBlock>
+                <StackPanel Grid.Row="0">
+                    <TextBlock Text="총금액" />
+                    <TextBlock HorizontalAlignment="Right" Text="{Binding AppContext.CurrentOrder.TotalAmount, StringFormat={}{0:N0}}" />
+                </StackPanel>
                 <Button
                     Grid.Row="1"
                     Command="{Binding PaymentCommand}"
