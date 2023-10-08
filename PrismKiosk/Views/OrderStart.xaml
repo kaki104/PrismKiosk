@@ -12,6 +12,7 @@
     d:DesignHeight="1080"
     d:DesignWidth="640"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    FontSize="20"
     mc:Ignorable="d">
     <Grid>
         <!--  일반UI  -->

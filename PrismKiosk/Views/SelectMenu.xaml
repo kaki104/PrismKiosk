@@ -13,6 +13,7 @@
     d:DesignHeight="1080"
     d:DesignWidth="640"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    FontSize="20"
     mc:Ignorable="d">
     <UserControl.Resources>
         <Style TargetType="TabItem">
@@ -67,7 +68,7 @@
                             <ItemsPanelTemplate>
                                 <WrapPanel
                                     IsItemsHost="True"
-                                    ItemHeight="230"
+                                    ItemHeight="220"
                                     ItemWidth="310" />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>

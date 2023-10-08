@@ -33,7 +33,23 @@ namespace PrismKiosk.Models
         public int TotalAmount
         {
             get { return _totalAmount; }
-            set { SetProperty(ref _totalAmount, value); }
+            set { SetProperty(ref _totalAmount, value, () => RaisePropertyChanged(nameof(Change))); }
+        }
+        private int _receivedAmount;
+        /// <summary>
+        /// 받은 금액
+        /// </summary>
+        public int ReceivedAmount
+        {
+            get { return _receivedAmount; }
+            set { SetProperty(ref _receivedAmount, value, () => RaisePropertyChanged(nameof(Change))); }
+        }
+        /// <summary>
+        /// 거스름돈
+        /// </summary>
+        public int Change
+        {
+            get { return ReceivedAmount - TotalAmount < 0 ? 0 : ReceivedAmount - TotalAmount; }
         }
         /// <summary>
         /// 아이템들
