@@ -1,4 +1,5 @@
 ﻿using PrismKiosk.Commons;
+using System.Collections.Generic;
 
 namespace PrismKiosk.Models
 {
@@ -31,5 +32,9 @@ namespace PrismKiosk.Models
         /// 현재 진행 중인 주문
         /// </summary>
         Order CurrentOrder { get; set; }
+        /// <summary>
+        /// 결제 완료 된 주문 목록
+        /// </summary>
+        IList<Order> Orders { get; set; }
     }
 }

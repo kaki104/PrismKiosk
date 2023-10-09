@@ -52,6 +52,7 @@
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <TextBlock Margin="10" Text="받을 금액" />
                 <TextBlock
@@ -80,6 +81,13 @@
                     Margin="10"
                     HorizontalAlignment="Right"
                     Text="{Binding AppContext.CurrentOrder.Change, StringFormat={}{0:N0}}" />
+                <!--  실제 결제는 디바이스에서 처리해야함, 여기서는 결제가 완료된 상태로 변경하기 위해서 버튼 추가  -->
+                <Button
+                    Grid.Row="3"
+                    Grid.ColumnSpan="2"
+                    Margin="10"
+                    Command="{Binding CompleteCommand}"
+                    Content="결제완료" />
             </Grid>
         </Border>
 

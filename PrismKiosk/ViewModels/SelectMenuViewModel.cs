@@ -5,8 +5,6 @@ using PrismKiosk.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace PrismKiosk.ViewModels
@@ -148,7 +146,7 @@ namespace PrismKiosk.ViewModels
         /// <param name="orderDetail"></param>
         private void OnAdd(OrderDetail orderDetail)
         {
-            if(orderDetail == null)
+            if (orderDetail == null)
             {
                 return;
             }
@@ -169,7 +167,7 @@ namespace PrismKiosk.ViewModels
         /// </summary>
         private void OnNext()
         {
-            if(CurrentPage < _totalPages)
+            if (CurrentPage < _totalPages)
             {
                 DisplayProducts(CurrentPage + 1);
             }
@@ -179,7 +177,7 @@ namespace PrismKiosk.ViewModels
         /// </summary>
         private void OnPrevious()
         {
-            if(CurrentPage > 0)
+            if (CurrentPage > 0)
             {
                 DisplayProducts(CurrentPage - 1);
             }

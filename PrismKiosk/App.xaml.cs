@@ -31,7 +31,10 @@ namespace PrismKiosk
             //결제 화면
             containerRegistry.RegisterForNavigation<Payment>();
 
+            //관리자 로그인
             containerRegistry.RegisterForNavigation<ManagerLogin>();
+            //마감
+            containerRegistry.RegisterForNavigation<Deadline>();
         }
     }
 }

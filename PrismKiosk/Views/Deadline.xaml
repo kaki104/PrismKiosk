@@ -1,0 +1,23 @@
+﻿<UserControl
+    x:Class="PrismKiosk.Views.Deadline"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:PrismKiosk.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:vm="clr-namespace:PrismKiosk.ViewModels"
+    d:DataContext="{d:DesignInstance vm:DeadlineViewModel,
+                                     IsDesignTimeCreatable=True}"
+    d:DesignHeight="1080"
+    d:DesignWidth="640"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    mc:Ignorable="d">
+    <Grid>
+        <TextBlock
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            FontSize="20"
+            Text="Deadline" />
+    </Grid>
+</UserControl>

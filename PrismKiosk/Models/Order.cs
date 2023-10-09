@@ -3,8 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PrismKiosk.Models
 {
@@ -63,5 +61,17 @@ namespace PrismKiosk.Models
             TotalQuantity = Items.Sum(x => x.Quantity);
             TotalAmount = Items.Sum(x => x.Amount);
         }
+        /// <summary>
+        /// 주문완료 일시
+        /// </summary>
+        public DateTime? OrderDatetime { get; set; }
+        /// <summary>
+        /// 마감 여부
+        /// </summary>
+        public bool IsDeadline { get; set; }
+        /// <summary>
+        /// 마감 일시
+        /// </summary>
+        public DateTime? DeadlineDatetime { get; set; }
     }
 }

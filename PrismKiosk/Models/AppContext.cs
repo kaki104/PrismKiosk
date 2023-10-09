@@ -1,5 +1,6 @@
 ﻿using Prism.Mvvm;
 using PrismKiosk.Commons;
+using System.Collections.Generic;
 
 namespace PrismKiosk.Models
 {
@@ -58,5 +59,9 @@ namespace PrismKiosk.Models
             get { return _currentOrder; }
             set { SetProperty(ref _currentOrder, value); }
         }
+        /// <summary>
+        /// 결제 완료 된 주문 목록
+        /// </summary>
+        public IList<Order> Orders { get; set; } = new List<Order>();
     }
 }
