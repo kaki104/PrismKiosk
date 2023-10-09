@@ -65,13 +65,25 @@ namespace PrismKiosk.Models
         /// 주문완료 일시
         /// </summary>
         public DateTime? OrderDatetime { get; set; }
+        
+        private bool _isDeadline;
         /// <summary>
         /// 마감 여부
         /// </summary>
-        public bool IsDeadline { get; set; }
+        public bool IsDeadline
+        {
+            get { return _isDeadline; }
+            set { SetProperty(ref _isDeadline, value); }
+        }
+
+        private DateTime? _deadlineDatetime;
         /// <summary>
         /// 마감 일시
         /// </summary>
-        public DateTime? DeadlineDatetime { get; set; }
+        public DateTime? DeadlineDatetime
+        {
+            get { return _deadlineDatetime; }
+            set { SetProperty(ref _deadlineDatetime, value); }
+        }
     }
 }

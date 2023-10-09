@@ -33,7 +33,7 @@ namespace PrismKiosk.Models
         /// </summary>
         Order CurrentOrder { get; set; }
         /// <summary>
-        /// 결제 완료 된 주문 목록
+        /// 결제 완료 된 주문 목록 - 일반적으로는 결제 완료 후 바로 database에 저장하고, 메모리에 들고 있지는 않음
         /// </summary>
         IList<Order> Orders { get; set; }
     }

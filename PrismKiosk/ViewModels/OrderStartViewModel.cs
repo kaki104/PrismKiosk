@@ -43,7 +43,7 @@ namespace PrismKiosk.ViewModels
         }
         private void TimerTick(object sender, EventArgs e)
         {
-            ClearAppContextAndGoHome();
+            ClearKioskAppContextAndGoHome();
         }
 
         /// <summary>

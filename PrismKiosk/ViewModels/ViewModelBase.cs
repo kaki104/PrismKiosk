@@ -108,12 +108,12 @@ namespace PrismKiosk.ViewModels
             {
                 return;
             }
-            ClearAppContextAndGoHome();
+            ClearKioskAppContextAndGoHome();
         }
         /// <summary>
         /// AppContext 내용 클리어
         /// </summary>
-        protected void ClearAppContextAndGoHome()
+        protected void ClearKioskAppContextAndGoHome()
         {
             //지금까지 주문 내역 클리어
             AppContext.IsEatIn = false;
@@ -126,6 +126,22 @@ namespace PrismKiosk.ViewModels
             }
             region.RemoveAll();
             region.RequestNavigate("KioskIntro");
+        }
+        /// <summary>
+        /// 관리자 로그아웃
+        /// </summary>
+        protected void LogoutManager()
+        {
+            //로그아웃
+            AppContext.IsLogin = false;
+            //처음 화면으로 이동
+            var region = RegionManager.Regions["ManagerContentRegion"];
+            if (region == null)
+            {
+                return;
+            }
+            region.RemoveAll();
+            region.RequestNavigate("ManagerLogin");
         }
 
         /// <summary>

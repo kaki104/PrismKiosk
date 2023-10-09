@@ -12,12 +12,78 @@
     d:DesignHeight="1080"
     d:DesignWidth="640"
     prism:ViewModelLocator.AutoWireViewModel="True"
+    FontSize="20"
     mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="DataGridTextColumnRight" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Right" />
+        </Style>
+        <Style x:Key="HeaderTextCenter" TargetType="DataGridColumnHeader">
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
-        <TextBlock
-            HorizontalAlignment="Center"
-            VerticalAlignment="Center"
-            FontSize="20"
-            Text="Deadline" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" Text="마감" />
+        <StackPanel
+            Grid.Row="1"
+            Margin="0,10,0,0"
+            Orientation="Horizontal">
+            <TextBlock VerticalAlignment="Center" Text="마감일" />
+            <DatePicker Margin="10,0,0,0" SelectedDate="{Binding DeadlineDatetime, Mode=TwoWay}" />
+            <Button
+                Width="100"
+                Margin="10,0,0,0"
+                Content="검색" />
+            <Button
+                Width="100"
+                Margin="10,0,0,0"
+                Command="{Binding LogoutCommand}"
+                Content="로그아웃" />
+        </StackPanel>
+        <TabControl Grid.Row="2" Margin="0,10,0,0">
+            <TabItem Header="매출 목록">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding AppContext.Orders}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding OrderId}" Header="주문Id" />
+                        <DataGridTextColumn
+                            Binding="{Binding TotalQuantity, StringFormat={}{0:N0}}"
+                            ElementStyle="{StaticResource DataGridTextColumnRight}"
+                            Header="총수량" />
+                        <DataGridTextColumn
+                            Binding="{Binding TotalAmount, StringFormat={}{0:N0}}"
+                            ElementStyle="{StaticResource DataGridTextColumnRight}"
+                            Header="총금액" />
+                        <DataGridTextColumn
+                            Binding="{Binding ReceivedAmount, StringFormat={}{0:N0}}"
+                            ElementStyle="{StaticResource DataGridTextColumnRight}"
+                            Header="받은 금액" />
+                        <DataGridTextColumn
+                            Binding="{Binding Change, StringFormat={}{0:N0}}"
+                            ElementStyle="{StaticResource DataGridTextColumnRight}"
+                            Header="거스름돈" />
+                        <DataGridTextColumn Binding="{Binding OrderDatetime, StringFormat={}{0:g}}" Header="결제 일시" />
+                        <DataGridCheckBoxColumn Binding="{Binding IsDeadline}" Header="마감여부" />
+                        <DataGridTextColumn Binding="{Binding DeadlineDatetime, StringFormat={}{0:g}}" Header="마감일시" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel
+            Grid.Row="3"
+            Margin="0,10"
+            Orientation="Horizontal">
+            <Button
+                Width="100"
+                Command="{Binding MakeDeadlineCommand}"
+                Content="마감" />
+        </StackPanel>
     </Grid>
 </UserControl>

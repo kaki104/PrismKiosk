@@ -1,6 +1,7 @@
 ﻿using Prism.Mvvm;
 using PrismKiosk.Commons;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace PrismKiosk.Models
 {
@@ -62,6 +63,6 @@ namespace PrismKiosk.Models
         /// <summary>
         /// 결제 완료 된 주문 목록
         /// </summary>
-        public IList<Order> Orders { get; set; } = new List<Order>();
+        public IList<Order> Orders { get; set; } = new ObservableCollection<Order>();
     }
 }

@@ -51,6 +51,7 @@ namespace PrismKiosk.ViewModels
             {
                 return;
             }
+            AppContext.IsLogin = true;
             RegionManager.RequestNavigate("ManagerContentRegion", "Deadline");
         }
     }

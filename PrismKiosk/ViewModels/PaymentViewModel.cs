@@ -49,7 +49,7 @@ namespace PrismKiosk.ViewModels
             AppContext.Orders.Add(AppContext.CurrentOrder);
             AppContext.CurrentOrder = null;
             //처음 화면으로 이동
-            ClearAppContextAndGoHome();
+            ClearKioskAppContextAndGoHome();
         }
     }
 }
