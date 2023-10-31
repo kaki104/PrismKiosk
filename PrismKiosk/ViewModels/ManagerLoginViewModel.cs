@@ -47,7 +47,7 @@ namespace PrismKiosk.ViewModels
 
         private void OnLogin()
         {
-            if (Id.ToLower() != "admin" || Password != "password")
+            if (Id?.ToLower() != "admin" || Password != "password")
             {
                 return;
             }
