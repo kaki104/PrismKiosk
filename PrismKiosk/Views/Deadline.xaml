@@ -23,14 +23,30 @@
         </Style>
     </UserControl.Resources>
 
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock HorizontalAlignment="Center" Text="마감" />
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                Margin="0,10"
+                FontWeight="Bold"
+                Text="마감" />
+            <Button
+                Grid.Column="1"
+                Width="100"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Command="{Binding LogoutCommand}"
+                Content="로그아웃" />
+        </Grid>
         <StackPanel
             Grid.Row="1"
             Margin="0,10,0,0"
@@ -40,16 +56,12 @@
             <Button
                 Width="100"
                 Margin="10,0,0,0"
+                Command="{Binding SearchCommand}"
                 Content="검색" />
-            <Button
-                Width="100"
-                Margin="10,0,0,0"
-                Command="{Binding LogoutCommand}"
-                Content="로그아웃" />
         </StackPanel>
         <TabControl Grid.Row="2" Margin="0,10,0,0">
             <TabItem Header="매출 목록">
-                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding AppContext.Orders}">
+                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding CurrentOrders}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding OrderId}" Header="주문Id" />
                         <DataGridTextColumn

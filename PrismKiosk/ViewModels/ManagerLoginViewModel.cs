@@ -1,5 +1,6 @@
 ﻿using Prism.Commands;
 using Prism.Ioc;
+using System.Windows;
 using System.Windows.Input;
 
 namespace PrismKiosk.ViewModels
@@ -47,8 +48,9 @@ namespace PrismKiosk.ViewModels
 
         private void OnLogin()
         {
-            if (Id.ToLower() != "admin" || Password != "password")
+            if (Id.ToLower() != "admin" || Password != "p")
             {
+                MessageBox.Show("아이디와 비밀번호를 확인하시기 바랍니다.");
                 return;
             }
             AppContext.IsLogin = true;
